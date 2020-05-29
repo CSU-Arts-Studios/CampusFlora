@@ -50,9 +50,9 @@
 
     _map = new google.maps.Map $('#map-canvas')[0],
       center:
-        lat: -33.886204, 
-        lng: 151.189005
-      zoom: 19,
+        lat: -35.0617924, 
+        lng: 147.3553251
+      zoom: 17,
       disableDefaultUI: true,
       mapTypeId: google.maps.MapTypeId.SATELLITE
 
@@ -62,6 +62,21 @@
     # Re center the map over the current position on click
     $('#current-location').on 'click', ->
       _map.panTo _geoMarker.getPosition()
+
+     $('#map-bathurst').on 'click', ->
+       _map.panTo
+          lat: -33.4316173,
+          lng: 149.5589876
+
+     $('#map-wagga').on 'click', ->
+       _map.panTo
+          lat: -35.0617924,
+          lng: 147.3553251
+
+     $('#map-wagga-east').on 'click', ->
+       _map.panTo
+          lat: -35.0556883,
+          lng: 147.3501494
 
 
 

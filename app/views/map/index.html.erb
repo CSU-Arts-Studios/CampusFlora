@@ -1,11 +1,6 @@
 <% unless browser.mobile? %>
-  <div id="overlay-dark-species" class="overlay-dark<%= @species_selected ? ' selected' : '' %>" <%= @species_selected ? 'style=display:block' : '' %>></div>
+  <div id="overlay-dark" class="overlay-dark<%= @species_selected ? ' selected' : '' %>" <%= @species_selected ? 'style=display:block' : '' %>></div>
 <% end %>
-
-<% unless browser.mobile? %>
-  <div id="overlay-dark-trail" class="overlay-dark<%= @trail_selected ? ' selected' : '' %>" <%= @trail_selected ? 'style=display:block' : '' %>></div>
-<% end %>
-
 <div id="popover-outer" class="popover-outer<%= @species_selected ? ' selected' : '' %>" <%= @species_selected ? 'style=display:block' : '' %>>
   <% if @species_selected %>
     <%= render 'species/popover' %>
@@ -24,17 +19,26 @@
       <h1 class="title">About</h1>
       <p>Representing <abbr class="highlight"><%= @families_count %></abbr> families, <abbr class="highlight"><%= @species.size %></abbr> species and <abbr class="highlight"><%= @species_location_count %></abbr> individual plants.</p>
       <%= @markdown.render(@page_content.about_page_content).html_safe %> <br />
-      <p><a href="http://sydney.edu.au/privacy.shtml" target="_privacy">Privacy Policy</a></p>
+      <p><a href="http://www.csu.edu.au/privacy.shtml" target="_privacy">Privacy Policy</a></p>
     </div>
   </div>
 </div>
 
 <% unless browser.mobile? %>
-  <a href="http://sydney.edu.au">
+
     <div id="usyd-logo" class="usyd-logo">
-      <%= image_tag 'usyd-logo.png' %>
-    </div>
+  <a href="http://www.csu.edu.au">
+	<%= image_tag 'csu-logo.png' %>
   </a>
+		<div class="dropdown">
+		  <button onclick="myFunction()" class="dropbtn" id="btnlocation">Wagga Campus</button>
+		  <div id="myDropdown" class="dropdown-content">
+                <div id="map-wagga"> <a href="javascript:$('#btnlocation').text('Wagga Campus');">Wagga Campus</a></div>
+                <div id="map-wagga-east"> <a href="javascript:$('#btnlocation').text('Wagga East Campus');">Wagga East Campus</a></div>
+ 		<div id="map-bathurst">	<a href="javascript:$('#btnlocation').text('Bathurst Campus');">Bathurst Campus</a></div>
+		  </div>
+		</div>
+	</div>
 <% end %>
 
 <div id="inner-container" class="inner-container<%= browser.mobile? && browser.safari? ? ' ios' : '' %>">
@@ -85,4 +89,25 @@
         FastClick.attach(document.body);
     }, false);
   }
+
+  /* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
 </script>
